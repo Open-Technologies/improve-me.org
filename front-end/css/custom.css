@@ -1,0 +1,12 @@
+.error {
+  color: #E34B11;
+  text-transform: none;
+}
+
+.dropdown-menu > .error {
+  font-size: 10px;
+}
+
+.pagination > li > a.active {
+  background: #428992;
+}
