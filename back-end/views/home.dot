@@ -39,7 +39,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 text-left">
-            <p><i class="fa fa-book"></i> Best learning management template for ever.</p>
+            <p><i class="fa fa-book"></i> Портал для самосовершенствования.</p>
 					</div>
 
           <div class="col-md-6 text-right">
@@ -77,93 +77,64 @@
 		</div>
 
 		<header class="header">
-            <div class="container">
-                <div class="hovermenu ttmenu">
-                    <div class="navbar navbar-default" role="navigation">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="fa fa-bars"></span>
-                            </button>
-                            <div class="logo">
-                                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt=""></a>
-                            </div>
-                        </div>
-            
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a href="index.html">Главная</a></li>
-                                <li class="dropdown ttmenu-half"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Категории <b class="fa fa-angle-down"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                        <div class="ttmenu-content">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="box">
-                                                        <ul>
-                                                            <li><a href="course-list.html">Courses List</a></li>
-                                                            <li><a href="course-grid.html">Courses Grid</a></li>
-                                                            <li><a href="course-filterable.html">Courses Filterable</a></li>
-                                                            <li><a href="course-single.html">Single Course</a></li>
-                                                            <li><a href="course-quiz.html">Take a Quiz</a></li>
-                                                            <li><a href="course-achievements.html">Achievements</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="box">
-                                                    	<ul>
-                                                            <li><a href="course-instructors.html">Course Instructors</a></li>
-                                                            <li><a href="forums.html">Community Forums</a></li>
-                                                            <li><a href="course-login.html">Login & Register</a></li>
-                                                            <li><a href="course-account.html">Edit Your Account</a></li>
-                                                            <li><a href="course-testimonials.html">Happy Students</a></li>
-                                                            <li><a href="course-faqs.html">Friendly Asked Questions</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-											<div class="row">
-                                                <div class="col-md-3 col-sm-6 nopadding">
-													<img class="img-thumbnail" src="upload/service_01.png" alt="">
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 nopadding">
-													<img class="img-thumbnail" src="upload/service_02.png" alt="">
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 nopadding">
-													<img class="img-thumbnail" src="upload/service_03.png" alt="">
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 nopadding">
-													<img class="img-thumbnail" src="upload/service_04.png" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                              <li><a href="tests.html">Тесты</a></li>
-                            </ul>
-                            [[? model.authorized === false ]]
-                              <ul class="nav navbar-nav navbar-right">
-                                  <li><a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a></li>
-                              </ul>
-                            [[?]]
-                        </div>
-                    </div>
-                </div>  
+      <div class="container">
+        <div class="hovermenu ttmenu">
+          <div class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+              </button>
+              <div class="logo">
+                <a class="navbar-brand" href="/"><img src="images/logo.png" alt=""></a>
+              </div>
             </div>
+
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/">Главная</a></li>
+                <li class="dropdown ttmenu-half">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Категории <b class="fa fa-angle-down"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="ttmenu-content">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="box">
+                              <ul>
+                                <li><a href="/category/1">Самооценка</a></li>
+                                <li><a href="/category/2">Уверенность</a></li>
+                                <li><a href="/category/3">Прокрастинация</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="/tests">Тесты</a></li>
+              </ul>
+              [[? model.authorized === false ]]
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a></li>
+                </ul>
+              [[?]]
+            </div>
+          </div>
+        </div>
+      </div>
 		</header>
 
     [[? model.authorized === false ]]
-      <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('upload/parallax_01.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
+      <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('images/zvezdnaya-noch.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="section-title text-center">
-                <h4>The Working Process</h4>
-                <p>We Shared Awesome Articles for Your Next Sites</p>
+                <h4>Регистрируйся</h4>
+                <p>Мы найдём то, что тебе интересно</p>
               </div>
             </div>
           </div>
@@ -197,7 +168,7 @@
           <div class="row button-wrapper">
             <div class="col-md-12">
               <div class="text-center">
-                <a href="#" class="btn btn-default">Start New Project</a>
+                <a href="/signup" class="btn btn-default">Начать</a>
               </div>
             </div>
           </div>
