@@ -45,7 +45,7 @@ app.get('/', function (req, res, next) {
       return next(err);
     }
 
-    res.render('home', {
+    res.render('posts', {
       authorized: Boolean(req.session.userId),
       feed: posts,
       pages: pages,
