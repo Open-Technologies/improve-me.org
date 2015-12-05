@@ -1,7 +1,7 @@
 var squel = require('squel');
 var mysql = require('../common/mysql');
 
-var user = {
+var userModel = {
   login: function (login, password, cb) {
     var query = squel.select()
       .from('users')
@@ -46,4 +46,4 @@ var user = {
   }
 };
 
-module.exports = user;
+module.exports = userModel;

@@ -3,7 +3,7 @@ var mysql = require('../common/mysql');
 
 var RECORDS_PER_PAGE = 8;
 
-var posts = {
+var postsModel = {
   getFeed: function (page, cb) {
     var query = squel.select()
       .from('posts')
@@ -35,4 +35,4 @@ var posts = {
   }
 };
 
-module.exports = posts;
+module.exports = postsModel;

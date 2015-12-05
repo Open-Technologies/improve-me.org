@@ -3,7 +3,7 @@ var appRootPath = require('app-root-path');
 var express = require('express');
 var MySQLSession = require('express-mysql-session');
 var session = require('express-session');
-var expressDotEngine = require('express-dot-engine');
+var dotInclude = require('dot-include');
 var bodyParser = require('body-parser');
 var serverConfig = require('./config/server');
 var mysqlConfig = require('./config/mysql');
@@ -15,7 +15,7 @@ var __ROOT = appRootPath.toString();
 var app = express();
 
 // Template engine settings
-app.engine('dot', expressDotEngine.__express);
+app.engine('dot', dotInclude.__express);
 app.set('views', path.join(__ROOT, 'back-end/views'));
 app.set('view engine', 'dot');
 
@@ -50,9 +50,14 @@ app.get('/', function (req, res, next) {
       feed: posts,
       pages: pages,
       currentPage: curPage,
-      loginErr: Boolean(req.query.loginErr)
+      loginErr: Boolean(req.query.loginErr),
+      registeringStep: 'BASE_TESTS' // 'BASE_TESTS', 'COMPLETED'
     });
   });
+});
+
+app.get('/tests', function (req, res) {
+  res.render('tests');
 });
 
 app.get('/signup', function (req, res) {

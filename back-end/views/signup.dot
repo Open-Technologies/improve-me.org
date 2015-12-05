@@ -65,11 +65,11 @@
                                     <div class="form-group">
                                         <input type="password" name="password" tabindex="2" class="form-control" placeholder="Password">
                                     </div>
-                                    [[? model.errorMsg ]]
+                                    {{? it.errorMsg }}
                                       <div class="form-group error">
-                                        [[= model.errorMsg ]]
+                                        {{= it.errorMsg }}
                                       </div>
-                                    [[?]]
+                                    {{?}}
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12">

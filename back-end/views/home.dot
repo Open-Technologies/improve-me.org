@@ -45,19 +45,19 @@
           <div class="col-md-6 text-right">
 						<ul class="list-inline">
               <li class="dropdown">
-                [[? model.authorized ]]
+                {{? it.authorized }}
                   <a href="/logout"><i class="fa fa-lock"></i> Выйти</a>
-                [[??]]
+                {{??}}
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-lock"></i> Войти</a>
-                  <div class="dropdown-menu" [[? model.loginErr ]]style="display:block"[[?]]>
+                  <div class="dropdown-menu" {{? it.loginErr }}style="display:block"{{?}}>
                     <form method="post" action="/api/signin">
                       <div class="form-title">
                         <h4>Авторизация</h4>
                         <hr>
                       </div>
-                      [[? model.loginErr ]]
+                      {{? it.loginErr }}
                         <span class="error">Неверный логин или пароль</span>
-                      [[?]]
+                      {{?}}
                       <input class="form-control" type="text" name="login" placeholder="Имя Пользователя">
                       <div class="formpassword">
                         <input class="form-control" type="password" name="password" placeholder="******">
@@ -68,7 +68,7 @@
                       <h4><a href="/signup">Создать аккаунт</a></h4>
                     </form>
                   </div>
-                [[?]]
+                {{?}}
               </li>
             </ul>
 					</div>
@@ -115,18 +115,18 @@
                 </li>
                 <li><a href="/tests">Тесты</a></li>
               </ul>
-              [[? model.authorized === false ]]
+              {{? it.authorized === false }}
                 <ul class="nav navbar-nav navbar-right">
                   <li><a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a></li>
                 </ul>
-              [[?]]
+              {{?}}
             </div>
           </div>
         </div>
       </div>
 		</header>
 
-    [[? model.authorized === false ]]
+    {{? it.authorized === false || it.registeringStep !== 'BASE_TESTS' }}
       <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('images/zvezdnaya-noch.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
         <div class="overlay"></div>
         <div class="container">
@@ -168,62 +168,66 @@
           <div class="row button-wrapper">
             <div class="col-md-12">
               <div class="text-center">
-                <a href="/signup" class="btn btn-default">Начать!</a>
+                {{? it.authorized === false }}
+                  <a href="/signup" class="btn btn-default">Начать!</a>
+                {{??}}
+                  <a href="/tests" class="btn btn-default">Пройти базовые тесты</a>
+                {{?}}
               </div>
             </div>
           </div>
         </div>
       </section>
-    [[?]]
+    {{?}}
 
     <section class="grey section">
       <div class="container">
         <div class="row">
           <div id="content" class="col-md-12 col-sm-12 col-xs-12">
-            [[~ model.feed:record ]]
+            {{~ it.feed:record }}
               <div class="blog-wrapper">
                 <div class="blog-title">
-                  <a class="category_title" href="/category/[[= record.categoryId ]]">[[= record.category]]</a>
-                  <h2><a href="/post/[[= record.id]]">[[= record.title]]</a></h2>
+                  <a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category}}</a>
+                  <h2><a href="/post/{{= record.id}}">{{= record.title}}</a></h2>
                 </div>
-                [[? record.imageUrl ]]
+                {{? record.imageUrl }}
                   <div class="blog-image">
-                    <a href="/post/[[= record.id]]">
-                      <img src="[[= record.imageUrl]]" alt="[[= record.title]]">
+                    <a href="/post/{{= record.id}}">
+                      <img src="{{= record.imageUrl}}" alt="{{= record.title}}">
                     </a>
                   </div>
-                [[?]]
+                {{?}}
                 <div class="blog-desc">
-                  <p>[[= record.shortcut]]</p>
-                  <a href="/post/[[= record.id]]" class="readmore">Показать продолжение...</a>
+                  <p>{{= record.shortcut}}</p>
+                  <a href="/post/{{= record.id}}" class="readmore">Показать продолжение...</a>
                 </div>
               </div>
-            [[~]]
+            {{~}}
 
-            [[? model.pages > 1 ]]
+            {{? it.pages > 1 }}
               <hr class="invis">
               <nav class="text-center">
                 <ul class="pagination">
-                  [[? model.currentPage !== 1 ]]
+                  {{? it.currentPage !== 1 }}
                     <li>
                       <a href="/?page=1" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                  [[?]]
-                  [[ for (var i = 1; i <= model.pages; i++) { ]]
-                    <li><a href="/?page=[[= i]]" [[? i === model.currentPage ]]class="active"[[?]]>[[= i ]]</a></li>
-                  [[ } ]]
-                  [[? model.currentPage !== model.pages ]]
+                  {{?}}
+                  {{ for (var i = 1; i <= it.pages; i++) { }}
+                    <li><a href="/?page={{= i}}" {{? i === it.currentPage }}class="active"{{?}}>{{= i }}</a></li>
+                  {{ } }}
+                  {{? it.currentPage !== it.pages }}
                     <li>
-                      <a href="/?page=[[= model.pages ]]" aria-label="Next">
+                      <a href="/?page={{= it.pages }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
-                  [[?]]
+                  {{?}}
                 </ul>
               </nav>
-            [[?]]
+            {{?}}
           </div>
         </div>
       </div>
