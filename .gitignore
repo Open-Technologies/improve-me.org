@@ -1,5 +1,5 @@
 .idea
 node_modules
 *.log
-config/mysql.js
-config/server.js
+back-end/config/mysql.js
+back-end/config/server.js
