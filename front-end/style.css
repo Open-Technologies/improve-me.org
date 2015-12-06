@@ -638,19 +638,24 @@
 		border-color: transparent;
 		margin: 30px 0
 	}
-	.section-title {
-		margin-bottom: 40px;
+  .section-title {
+    margin-bottom: 40px;
+  }
+	.section-title,
+  .section-block {
 		display: block;
 		position: relative;
 	}
-	.section-title h4 {
+	.section-title h4,
+  .section-block h4 {
 		font-size: 28px;
 		padding-bottom: 5px;
 		margin-bottom: 0;
 		font-weight: bold;
 	}
 	.button-wrapper p,
-	.section-title p {
+	.section-title p,
+  .section-block p {
 		font-style: italic;
 		font-size: 15px;
 		font-weight: 300;

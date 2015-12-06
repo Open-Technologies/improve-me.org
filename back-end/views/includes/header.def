@@ -115,11 +115,15 @@
                 </li>
                 <li><a href="/tests">Тесты</a></li>
               </ul>
-              {{? it.authorized === false }}
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a></li>
-                </ul>
-              {{?}}
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  {{? it.authorized === false }}
+                    <a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a>
+                  {{??}}
+                    <a class="btn btn-primary" href="/profile"><i class="fa fa-edit"></i> Мой профиль</a>
+                  {{?}}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
