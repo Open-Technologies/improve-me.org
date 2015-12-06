@@ -15,7 +15,7 @@
       <div class="row service-center">
         <div class="col-md-4 col-sm-6">
           <div class="feature-list">
-            <i class="fa fa-graduation-cap"></i>
+            <i class="fa fa-pencil"></i>
             <p><strong>Пройти базовые тесты</strong></p>
             <p>У нас есть много тестов, которые мы тщательно обрабатываем и результаты сохраняются на вашем аккаунте</p>
           </div>
@@ -23,7 +23,7 @@
 
         <div class="col-md-4 col-sm-6">
           <div class="feature-list">
-            <i class="fa fa-shopping-cart"></i>
+            <i class="fa fa-book"></i>
             <p><strong>Прочитать статьи</strong></p>
             <p>Основываясь на результатах тестов мы подберем нужные статьи</p>
           </div>
@@ -31,7 +31,7 @@
 
         <div class="col-md-4 col-sm-6">
           <div class="feature-list">
-            <i class="fa fa-question"></i>
+            <i class="fa fa-graduation-cap"></i>
             <p><strong>Самосовершенствоваться</strong></p>
             <p>Вы многое сможете взять на заметку :)</p>
           </div>
@@ -47,8 +47,7 @@
       </div>
     </div>
   </section>
-{{?}}
-{{? it.registeringStep === 'BASE_TESTS' }}
+{{?? it.registeringStep === 'BASE_TESTS' }}
   <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('images/zvezdnaya-noch.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
     <div class="overlay"></div>
     <div class="container">

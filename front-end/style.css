@@ -584,6 +584,7 @@
 	}
 	.feature-list {
 		display: table;
+    width: 100%;
 	}
 	.why-us i,
 	.feature-list i {
