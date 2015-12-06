@@ -207,7 +207,7 @@
 
   .header-wrapper {
     background-color: #fff;
-    height: 102px;
+    min-height: 102px;
   }
 	.header.affix{
 		top:0;
