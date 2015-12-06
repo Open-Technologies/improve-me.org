@@ -9,6 +9,7 @@ var serverConfig = require('./config/server');
 var mysqlConfig = require('./config/mysql');
 var userModel = require('./models/user');
 var postsModel = require('./models/posts');
+var testsModel = require('./models/tests');
 
 var __ROOT = appRootPath.toString();
 
@@ -56,8 +57,18 @@ app.get('/', function (req, res, next) {
   });
 });
 
-app.get('/tests', function (req, res) {
-  res.render('tests');
+app.get('/tests', function (req, res, next) {
+  if (!req.session.userId) {
+    return next();
+  }
+  testsModel.getList(function (err, tests) {
+    if (err) {
+      return next(err);
+    }
+    res.render('tests', {
+      tests: tests
+    });
+  });
 });
 
 app.get('/signup', function (req, res) {

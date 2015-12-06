@@ -205,6 +205,10 @@
 	HEADER & MENUS
 ================================================================== */
 
+  .header-wrapper {
+    background-color: #fff;
+    height: 102px;
+  }
 	.header.affix{
 		top:0;
 		left:0;
@@ -837,7 +841,6 @@
 		font-weight: 600;
 		margin: 20px 0 10px;
 		line-height: 1.3 !important;
-		text-transform: capitalize;
 		padding:0;
 	}
 	.shop-item-list h4 a,

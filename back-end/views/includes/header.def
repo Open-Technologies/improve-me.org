@@ -76,56 +76,58 @@
       </div>
 		</div>
 
-		<header class="header">
-      <div class="container">
-        <div class="hovermenu ttmenu">
-          <div class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-              </button>
-              <div class="logo">
-                <a class="navbar-brand" href="/"><img src="images/logo.png" alt=""></a>
+    <div class="header-wrapper">
+      <header class="header">
+        <div class="container">
+          <div class="hovermenu ttmenu">
+            <div class="navbar navbar-default" role="navigation">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="fa fa-bars"></span>
+                </button>
+                <div class="logo">
+                  <a class="navbar-brand" href="/"><img src="images/logo.png" alt=""></a>
+                </div>
               </div>
-            </div>
 
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="/">Главная</a></li>
-                <li class="dropdown ttmenu-half">
-                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Категории <b class="fa fa-angle-down"></b></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <div class="ttmenu-content">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="box">
-                              <ul>
-                                <li><a href="/category/1">Самооценка</a></li>
-                                <li><a href="/category/2">Уверенность</a></li>
-                                <li><a href="/category/3">Прокрастинация</a></li>
-                              </ul>
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li><a href="/">Главная</a></li>
+                  <li class="dropdown ttmenu-half">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Категории <b class="fa fa-angle-down"></b></a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <div class="ttmenu-content">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="box">
+                                <ul>
+                                  <li><a href="/category/1">Самооценка</a></li>
+                                  <li><a href="/category/2">Уверенность</a></li>
+                                  <li><a href="/category/3">Прокрастинация</a></li>
+                                </ul>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="/tests">Тесты</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  {{? it.authorized === false }}
-                    <a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a>
-                  {{??}}
-                    <a class="btn btn-primary" href="/profile"><i class="fa fa-edit"></i> Мой профиль</a>
-                  {{?}}
-                </li>
-              </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="/tests">Тесты</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    {{? it.authorized === false }}
+                      <a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a>
+                    {{??}}
+                      <a class="btn btn-primary" href="/profile"><i class="fa fa-edit"></i> Мой профиль</a>
+                    {{?}}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-		</header>
+      </header>
+    </div>

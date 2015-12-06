@@ -6,7 +6,9 @@ var testsModel = {
     var query = squel.select()
       .from('test')
       .field('id')
-      .field('name');
+      .field('name')
+      .field('image')
+      .field('description');
     mysql.query(query, cb);
   }
 };

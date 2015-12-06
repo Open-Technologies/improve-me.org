@@ -1,0 +1,48 @@
+{{#def.include('includes/header')}}
+<section class="grey page-title">
+  <div class="container">
+    <div class="row">  
+      <div class="col-md-6 text-left">
+        <h1>Тесты</h1>
+      </div>
+      <div class="col-md-6 text-right">
+        <div class="bread">
+          <ol class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <li class="active">Тесты</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="white section">
+    <div class="container">
+      {{~ it.tests:test }}
+        <div class="row course-list">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="shop-item-list entry">
+              <a href="/tests/{{= test.id }}">
+                {{? test.image }}
+                  <img src="{{= test.image}}" alt="{{= test.name }}">
+                {{??}}
+                  <img src="images/test_image_default.png" alt="{{= test.name }}">
+                {{?}}
+                <div class="magnifier"></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-8 col-md-8">
+            <div class="shop-list-desc">
+              <h4><a href="/tests/{{= test.id }}">{{= test.name }}</a></h4>
+              <div class="shopmeta"></div>
+              <p>{{= test.description }}</p>
+              <a href="/tests/{{= test.id }}" class="btn btn-default btn-sm">Пройти тест</a>
+            </div>
+          </div>
+        </div>
+      {{~}}
+    </div>
+  </section>
+{{#def.include('includes/footer')}}

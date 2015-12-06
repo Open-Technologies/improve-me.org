@@ -98,7 +98,7 @@ AFFIX -->
 
     $('.header').affix({
       offset: {
-        top: 100,
+        top: 65,
         bottom: function () {
           return (this.bottom = $('.footer').outerHeight(true))
         }
