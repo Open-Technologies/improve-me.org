@@ -562,7 +562,8 @@
 		position: relative;
 		display: block;
 	}
-	.white {
+	.content {
+    padding-top: 30px;
 		background-color: #ffffff;
 	}
 	.grey {

@@ -1,0 +1,86 @@
+{{#def.include('includes/header')}}
+<section class="grey page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h1>{{= it.name }}</h1>
+      </div>
+      <div class="col-md-6 text-right">
+        <div class="bread">
+          <ol class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/tests">Тесты</a></li>
+            <li class="active">{{= it.name }}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="content section">
+  <div class="container">
+    <div class="row">
+      <div id="course-content" class="col-md-12">
+        {{~ it.questions:question:i }}
+          {{? i === 0 }}
+            <div class="course-description">
+          {{??}}
+            <div class="course-description" style="display:none">
+          {{?}}
+            <h3 class="course-title">Вопрос {{= i + 1}}</h3>
+
+            <div class="quiz-wrapper">
+              <h4>{{= question.body}}</h4>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-primary">
+                    <div class="panel-body">
+                      {{~ question.variants:variant }}
+                        <div class="radio">
+                          <label>
+                            <input name="question-{{= i }}" class="variant" value="{{= variant.id }}" type="radio"> {{= variant.text}}
+                          </label>
+                        </div>
+                      {{~}}
+                    </div>
+                  </div>
+
+                  <hr class="invis">
+
+                  <p class="lead"><span class="progress-level">0%</span> Завершено</p>
+
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width:0%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  {{? i === 0 }}
+                    <a href="#" class="prev-test btn btn-default btn-block disabled">Предыдущий вопрос</a>
+                  {{??}}
+                    <a href="#" class="prev-test btn btn-default btn-block">Предыдущий вопрос</a>
+                  {{?}}
+                </div>
+                <div class="col-md-6">
+                  {{? i === it.questions.length - 1 }}
+                    <input type="submit" class="complete next-test btn btn-default btn-block disabled" value="Завершить">
+                  {{??}}
+                    <a href="#" class="next-test btn btn-default btn-block disabled">Следующий вопрос</a>
+                  {{?}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{~}}
+      </div>
+    </div>
+  </div>
+</section>
+{{##def.content:
+	<script src="/js/views/test.js"></script>
+#}}
+{{#def.include('includes/footer')}}

@@ -71,6 +71,18 @@ app.get('/tests', function (req, res, next) {
   });
 });
 
+app.get('/tests/:id', function (req, res, next) {
+  if (!req.session.userId) {
+    return next();
+  }
+  testsModel.getTest(req.params.id, function (err, testData) {
+    if (err) {
+      return next(err);
+    }
+    res.render('test', testData);
+  });
+});
+
 app.get('/signup', function (req, res) {
   res.render('signup', {
     errorMsg: req.query.errorMsg

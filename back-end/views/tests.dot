@@ -27,7 +27,7 @@
                 {{? test.image }}
                   <img src="{{= test.image}}" alt="{{= test.name }}">
                 {{??}}
-                  <img src="images/test_image_default.png" alt="{{= test.name }}">
+                  <img src="/images/test_image_default.png" alt="{{= test.name }}">
                 {{?}}
                 <div class="magnifier"></div>
               </a>
