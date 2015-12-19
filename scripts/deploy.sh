@@ -5,7 +5,7 @@ BASE_DIR=$(dirname "$SCRIPT");
 
 cd $BASE_DIR/..;
 
-git checkout develop
+git checkout master
 git pull --rebase
 
 npm i
