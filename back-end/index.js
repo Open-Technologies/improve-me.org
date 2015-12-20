@@ -51,7 +51,6 @@ app.get('/', function (req, res, next) {
       feed: posts,
       pages: pages,
       currentPage: curPage,
-      loginErr: Boolean(req.query.loginErr),
       registeringStep: 'BASE_TESTS' // 'BASE_TESTS', 'COMPLETED'
     });
   });
@@ -59,7 +58,7 @@ app.get('/', function (req, res, next) {
 
 app.get('/tests', function (req, res, next) {
   if (!req.session.userId) {
-    return next();
+    return res.redirect('/signin');
   }
   testsModel.getList(function (err, tests) {
     if (err) {
@@ -73,7 +72,7 @@ app.get('/tests', function (req, res, next) {
 
 app.get('/tests/:id', function (req, res, next) {
   if (!req.session.userId) {
-    return next();
+    return res.redirect('/signin');
   }
   testsModel.getTest(req.params.id, function (err, testData) {
     if (err) {
@@ -83,8 +82,32 @@ app.get('/tests/:id', function (req, res, next) {
   });
 });
 
+app.get('/test-result/:resultId', function (req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/signin');
+  }
+  testsModel.getResult(req.session.userId, req.params.resultId, function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    res.render('test-result', result);
+  });
+});
+
 app.get('/signup', function (req, res) {
+  if (req.session.userId) {
+    return res.redirect('/');
+  }
   res.render('signup', {
+    errorMsg: req.query.errorMsg
+  });
+});
+
+app.get('/signin', function (req, res) {
+  if (req.session.userId) {
+    return res.redirect('/');
+  }
+  res.render('signin', {
     errorMsg: req.query.errorMsg
   });
 });
@@ -97,7 +120,7 @@ app.get('/logout', function (req, res) {
 app.post('/api/signin', function (req, res) {
   userModel.login(req.body.login, req.body.password, function (err, userId) {
     if (err) {
-      return res.redirect('/?loginErr=1');
+      return res.redirect('/signin?errorMsg=' + encodeURIComponent(err.message));
     }
     req.session.userId = userId;
     res.redirect('/');
@@ -107,10 +130,22 @@ app.post('/api/signin', function (req, res) {
 app.post('/api/signup', function (req, res) {
   userModel.add(req.body.login, req.body.email, req.body.password, function (err, userId) {
     if (err) {
-      return res.redirect('/signup?errorMsg=' + err.message);
+      return res.redirect('/signup?errorMsg=' + encodeURIComponent(err.message));
     }
     req.session.userId = userId;
     res.redirect('/');
+  });
+});
+
+app.post('/api/test/:testId', function (req, res, next) {
+  if (!req.session.userId) {
+    return next();
+  }
+  testsModel.completeTest(req.session.userId, req.params.testId, req.body, function (err, resultId) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/test-result/' + resultId);
   });
 });
 

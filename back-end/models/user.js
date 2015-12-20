@@ -13,20 +13,20 @@ var userModel = {
         return cb(err);
       }
       if (!data.length) {
-        return cb(Error('Invalid login or password'));
+        return cb(Error('Неверный логин или пароль'));
       }
       cb(null, data[0].id);
     });
   },
 
   add: function (login, email, password, cb) {
-    if (login.length < 3) {
+    if (login.length < 3 || login.length > 64) {
       return cb(Error('Login is invalid'));
     }
-    if (email.length < 3) {
+    if (email.length < 3 || login.length > 64) {
       return cb(Error('Email is invalid'));
     }
-    if (password.length < 3) {
+    if (password.length < 3 || login.length > 64) {
       return cb(Error('Password is invalid'));
     }
 

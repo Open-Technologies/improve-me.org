@@ -1,5 +1,7 @@
 $(function () {
-  $('.variant').on('change', function () {
+  $('.variant').on('change', function (e) {
+    e.preventDefault();
+
     $(this)
       .parents('.course-description')
       .addClass('completed')
@@ -7,7 +9,11 @@ $(function () {
       .removeClass('disabled');
   });
 
-  $('.next-test').on('click', function () {
+  $('.next-test').on('click', function (e) {
+    if (e.target.type !== 'submit') {
+      e.preventDefault();
+    }
+
     $(this)
       .parents('.course-description')
       .hide()

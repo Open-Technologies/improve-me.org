@@ -1,0 +1,34 @@
+{{#def.include('includes/header')}}
+<section class="grey page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h1>{{= it.name }}</h1>
+      </div>
+      <div class="col-md-6 text-right">
+        <div class="bread">
+          <ol class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/tests">Тесты</a></li>
+            <li class="active">{{= it.name }}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content section">
+  <div class="container">
+    <div class="row">
+      <div id="course-content" class="col-md-12">
+        <div class="course-description">
+          <h3 class="course-title">Результат</h3>
+          <div class="quiz-wrapper">
+            <h4>{{= it.body}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{#def.include('includes/footer')}}

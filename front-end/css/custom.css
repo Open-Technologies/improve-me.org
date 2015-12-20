@@ -10,3 +10,7 @@
 .pagination > li > a.active {
   background: #428992;
 }
+
+input.form-control:focus:invalid {
+  border: 1px solid #E34B11;
+}
