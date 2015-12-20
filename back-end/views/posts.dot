@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        {{~ it.feed:record }}
+        {{~ it.posts:record }}
           <div class="blog-wrapper">
             <div class="blog-title">
               <a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category}}</a>
