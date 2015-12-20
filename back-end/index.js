@@ -176,6 +176,18 @@ app.get('/category/:categoryId', function(req, res, next) {
   });
 });
 
+app.get('/post/:postId', function (req, res, next) {
+  postsModel.getPost(req.params.postId, function (err, postInfo) {
+    if (err) {
+      return next(err);
+    }
+    res.render('post', {
+      authorized: Boolean(req.session.userId),
+      post: postInfo
+    });
+  });
+});
+
 app.post('/api/signin', function (req, res) {
   userModel.login(req.body.login, req.body.password, function (err, userId) {
     if (err) {

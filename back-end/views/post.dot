@@ -1,0 +1,35 @@
+{{#def.include('includes/header')}}
+<section class="grey content section">
+  <div class="container">
+    <div class="row">
+      <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+        <div class="blog-wrapper">
+          <div class="row second-bread">
+            <div class="col-md-6 text-left">
+              <h1>{{= it.post.title }}</h1>
+            </div>
+            <div class="col-md-6 text-right">
+              <div class="bread">
+                <ol class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li class="active">{{= it.post.title }}</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-wrapper">
+          {{? it.post.imageUrl }}
+            <div class="blog-image">
+              <img src="{{= it.post.imageUrl }}" alt="{{= it.post.title }}" class="img-responsive">
+            </div>
+          {{?}}
+          <div class="blog-desc">
+            {{= it.post.body }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{#def.include('includes/footer')}}

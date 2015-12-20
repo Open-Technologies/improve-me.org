@@ -2143,9 +2143,6 @@
   .blog-title {
     padding-bottom: 0;
   }
-  .blog-image {
-    padding-top: 30px;
-  }
   .blog-image img {
     width: 100%;
   }
@@ -2160,7 +2157,7 @@
 	.blog-title h2 {
 	    font-size: 30px;
 	    padding-bottom: 0;
-	    margin-bottom: 0;
+	    margin-bottom: 20px;
 	    margin-top: 0;
 	    color:#363a47;
 	    font-weight: 700;

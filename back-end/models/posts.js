@@ -52,6 +52,24 @@ var postsModel = {
       }
       cb(null, response[0].name);
     });
+  },
+
+  getPost: function (postId, cb) {
+    var query = squel.select()
+      .from('posts')
+      .field('title')
+      .field('body')
+      .field('imageUrl')
+      .where('id=?', postId);
+    mysql.query(query, function (err, response) {
+      if (err) {
+        return cb(err);
+      }
+      if (!response.length) {
+        return cb(Error('Post not found'));
+      }
+      cb(null, response[0]);
+    });
   }
 };
 
