@@ -349,7 +349,7 @@
 	}
 	.navbar-toggle .fa {
 		background-color: transparent !important;
-		color:#4949494 !important;
+		color:#494949 !important;
 	}
 	.ttmenu .navbar-default {
 		border-radius: 0;
@@ -1634,7 +1634,7 @@
 	    top: 0;
 	    left: 0;
 		bottom:0;
-		background:url(upload/about.jpg); no-repeat center center fixed; 
+		background:url(upload/about.jpg) no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -1647,7 +1647,7 @@
 	    top: 0;
 	    left: 0;
 		bottom:0;
-		background:url(upload/about_03.png); no-repeat center center fixed; 
+		background:url(upload/about_03.png) no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -2045,7 +2045,6 @@
 	}
 	.comment-wrapper h3 {
 		padding: 20px;
-		font-weight: 21px;
 		font-weight: 600;
 		text-align: center;
 	}
@@ -2231,7 +2230,7 @@
 	  	float: left;
 	  	height:100%;
 	  	bottom:0;
-	  	left: :0;
+	  	left: 0;
 	  	overflow-y:auto;
 	  	z-index: 9991;
 	  	overflow-x:hidden;
@@ -2244,15 +2243,15 @@
 	  	text-align: left;
 	}
 	#main {
-	  	height:100%;
-	  	overflow:auto;
-	  	margin-left:280px;
+    height:100%;
+    overflow:auto;
+    margin-left:280px;
 	}
 	.side-copyright {
 		position: absolute;
 		bottom:0;
 		padding-left: 40px;
-	  	text-align: left;
+    text-align: left;
 	}
 	.sidebar-nav li.active {
 		border-right: 4px solid #ddd;
@@ -2313,17 +2312,17 @@
 	        position: relative;
 	        box-shadow: none;
 	    }
-	   .mobile-menu{
-	      display: normal!important;
+	   .mobile-menu {
+	      display: block !important;
 	   }
 	}
 	@media screen and (max-width: 1180px) {
 	  .row-offcanvas {
-		position: relative;
-		-webkit-transition: all 0.25s ease-out;
-		-moz-transition: all 0.25s ease-out;
-		transition: all 0.25s ease-out;
-		width:calc(100% + 280px);
+      position: relative;
+      -webkit-transition: all 0.25s ease-out;
+      -moz-transition: all 0.25s ease-out;
+      transition: all 0.25s ease-out;
+      width:calc(100% + 280px);
 	  }  
 	  .row-offcanvas-left {
 	    left: -280px;
