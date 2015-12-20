@@ -10,9 +10,11 @@ $(function () {
   });
 
   $('.next-test').on('click', function (e) {
-    if (e.target.type !== 'submit') {
-      e.preventDefault();
+    if (e.target.type === 'submit') {
+      return;
     }
+
+    e.preventDefault();
 
     $(this)
       .parents('.course-description')

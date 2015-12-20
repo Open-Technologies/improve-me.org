@@ -11,3 +11,4 @@ git pull --rebase
 npm i
 
 pm2 start back-end -n develop -i 0
+pm2 reset develop
