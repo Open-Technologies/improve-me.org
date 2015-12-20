@@ -4,4 +4,3 @@ node_modules
 back-end/config/mysql.js
 back-end/config/server.js
 *.*~
-

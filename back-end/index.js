@@ -57,7 +57,6 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/tests', function (req, res, next) {
-    console.log('rabotaet');
   if (!req.session.userId) {
     return res.redirect('/signin');
   }
@@ -156,8 +155,8 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/category/:categoryId', function(req, res, next) {
-    var curPage = Number(req.query.page) || 1;
-    postsModel.getByCategory(req.params.categoryId, curPage, function (err, posts, pages) {
+  var curPage = Number(req.query.page) || 1;
+  postsModel.getByCategory(req.params.categoryId, curPage, function (err, posts, pages) {
     if (err) {
       return next(err);
     }
@@ -166,10 +165,9 @@ app.get('/category/:categoryId', function(req, res, next) {
       authorized: Boolean(req.session.userId),
       posts: posts,
       pages: pages,
-      currentPage: curPage,
-      registeringStep: 'BASE_TESTS' // 'BASE_TESTS', 'COMPLETED'
+      currentPage: curPage
     });
-});
+  });
 });
 
 app.post('/api/signin', function (req, res) {
