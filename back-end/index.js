@@ -60,11 +60,16 @@ app.get('/tests', function (req, res, next) {
   if (!req.session.userId) {
     return res.redirect('/signin');
   }
-  testsModel.getList(function (err, tests) {
+  var filters = {
+    status: req.query.status || 'NOT_FINISHED'
+  };
+  testsModel.getList(req.session.userId, filters, function (err, tests) {
     if (err) {
       return next(err);
     }
     res.render('tests', {
+      authorized: Boolean(req.session.userId),
+      filters: filters,
       tests: tests
     });
   });
@@ -91,6 +96,30 @@ app.get('/test-result/:resultId', function (req, res, next) {
       return next(err);
     }
     res.render('test-result', result);
+  });
+});
+
+app.get('/stats', function (req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/signin');
+  }
+  testsModel.getCompletedTests(req.session.userId, function (err, results) {
+    if (err) {
+      return next(err);
+    }
+    res.render('stats', {
+      authorized: Boolean(req.session.userId),
+      results: results
+    });
+  });
+});
+
+app.get('/profile', function (req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/signin');
+  }
+  res.render('profile', {
+    authorized: Boolean(req.session.userId)
   });
 });
 
@@ -128,7 +157,7 @@ app.post('/api/signin', function (req, res) {
 });
 
 app.post('/api/signup', function (req, res) {
-  userModel.add(req.body.login, req.body.email, req.body.password, function (err, userId) {
+  userModel.registration(req.body, function (err, userId) {
     if (err) {
       return res.redirect('/signup?errorMsg=' + encodeURIComponent(err.message));
     }

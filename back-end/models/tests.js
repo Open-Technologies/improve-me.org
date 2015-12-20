@@ -4,14 +4,52 @@ var doT = require('dot');
 var mysql = require('../common/mysql');
 
 var testsModel = {
-  getList: function (cb) {
+  getList: function (userId, filters, cb) {
     var query = squel.select()
       .from('test')
-      .field('id')
-      .field('name')
-      .field('image')
-      .field('description');
+      .field('test.id', 'id')
+      .field('test.name', 'name')
+      .field('test.image', 'image')
+      .field('test.description', 'description')
+      .group('test.id');
+    switch (filters.status) {
+      case 'FINISHED':
+        query.join('test_result', null, 'test_result.test_id = test.id AND test_result.user_id=' + mysql.escape(userId));
+        break;
+      case 'NOT_FINISHED':
+        query.left_join('test_result', null, 'test_result.test_id = test.id AND test_result.user_id=' + mysql.escape(userId))
+          .where('test_result.id IS NULL');
+        break;
+    }
     mysql.query(query, cb);
+  },
+
+  getCompletedTests: function (userId, cb) {
+    var query = squel.select()
+      .from('test')
+      .field('test.name', 'name')
+      .field('test.image', 'image')
+      .field('test.short_result_template', 'template')
+      .field('test_result.params', 'params')
+      .join('test_result', null, 'test_result.test_id = test.id AND test_result.user_id = ' + mysql.escape(userId))
+      .group('test.id');
+    mysql.query(query, function (err, response) {
+      if (err) {
+        return cb(err);
+      }
+      var params;
+      for (var i = 0; i < response.length; i++) {
+        try {
+          params = JSON.parse(response[i].params);
+        } catch (e) {
+          return cb(e);
+        }
+        response[i].body = doT.compile(response[i].template)(params);
+        delete response[i].template;
+        delete response[i].params;
+      }
+      cb(null, response);
+    });
   },
 
   getTest: function (id, cb) {

@@ -14,3 +14,12 @@
 input.form-control:focus:invalid {
   border: 1px solid #E34B11;
 }
+
+#course-left-sidebar label {
+  font-weight: normal;
+  color: #fff;
+}
+
+#course-left-sidebar .btn {
+  width: 100%;
+}

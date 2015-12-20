@@ -19,23 +19,27 @@ var userModel = {
     });
   },
 
-  add: function (login, email, password, cb) {
-    if (login.length < 3 || login.length > 64) {
+  registration: function (formData, cb) {
+    if (formData.login.length < 3 || formData.login.length > 64) {
       return cb(Error('Login is invalid'));
     }
-    if (email.length < 3 || login.length > 64) {
-      return cb(Error('Email is invalid'));
-    }
-    if (password.length < 3 || login.length > 64) {
+    if (formData.password.length < 3 || formData.login.length > 64) {
       return cb(Error('Password is invalid'));
+    }
+    if (['MALE', 'FEMALE'].indexOf(formData.sex) === -1) {
+      return cb(Error('Поле "Пол" не должно быть пустым'));
+    }
+    if (formData.year < 1900 || formData.year > new Date().getFullYear() - 4) {
+      return cb(Error('Поле "Дата рождения" не соответствует формату'));
     }
 
     var query = squel.insert()
       .into('users')
       .setFields({
-        login: login,
-        email: email,
-        password: password
+        login: formData.login,
+        password: formData.password,
+        sex: formData.sex,
+        year: formData.year
       });
     mysql.query(query, function (err, data) {
       if (err) {
