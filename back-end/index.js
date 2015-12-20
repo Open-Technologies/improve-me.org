@@ -119,8 +119,16 @@ app.get('/profile', function (req, res, next) {
   if (!req.session.userId) {
     return res.redirect('/signin');
   }
-  res.render('profile', {
-    authorized: Boolean(req.session.userId)
+  userModel.getInfo(req.session.userId, function (err, info) {
+    if (err) {
+      return next(err);
+    }
+    res.render('profile', {
+      authorized: Boolean(req.session.userId),
+      errorMsg: req.query.errorMsg,
+      ok: req.query.ok,
+      user: info
+    });
   });
 });
 
@@ -193,6 +201,18 @@ app.post('/api/test/:testId', function (req, res, next) {
       return next(err);
     }
     res.redirect('/test-result/' + resultId);
+  });
+});
+
+app.post('/api/profile', function (req, res, next) {
+  if (!req.session.userId) {
+    return next();
+  }
+  userModel.changeInfo(req.session.userId, req.body, function (err) {
+    if (err) {
+      return res.redirect('/profile?errorMsg=' + encodeURIComponent(err.message));
+    }
+    res.redirect('/profile?ok=1');
   });
 });
 

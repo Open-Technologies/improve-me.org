@@ -47,6 +47,59 @@ var userModel = {
       }
       cb(null, data.insertId);
     });
+  },
+
+  getInfo: function (userId, cb) {
+    var query = squel.select()
+      .from('users')
+      .field('login')
+      .field('sex')
+      .field('year')
+      .where('id=?', userId);
+    mysql.query(query, function (err, response) {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, response[0]);
+    });
+  },
+
+  changeInfo: function (userId, changes, cb) {
+    if (changes.newPassword) {
+      if (changes.password.length < 3 || changes.password.length > 64) {
+        return cb(Error('Password is invalid'));
+      }
+      if (changes.newPassword.length < 3 || changes.newPassword.length > 64) {
+        return cb(Error('New password is invalid'));
+      }
+    }
+    if (['MALE', 'FEMALE'].indexOf(changes.sex) === -1) {
+      return cb(Error('Поле "Пол" не должно быть пустым'));
+    }
+    if (changes.year < 1900 || changes.year > new Date().getFullYear() - 4) {
+      return cb(Error('Поле "Дата рождения" не соответствует формату'));
+    }
+
+    var query = squel.update()
+      .table('users')
+      .set('sex', changes.sex)
+      .set('year', changes.year)
+      .where('id=?', userId);
+
+    if (changes.newPassword) {
+      query.set('password', changes.newPassword)
+        .where('password=?', changes.password);
+    }
+
+    mysql.query(query, function (err, response) {
+      if (err) {
+        return cb(err);
+      }
+      if (!response.affectedRows) {
+        return cb(Error('Неверный пароль'));
+      }
+      cb(null);
+    });
   }
 };
 

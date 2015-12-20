@@ -68,7 +68,8 @@
                         <input type="password" name="password" tabindex="2" class="form-control" placeholder="Пароль" required>
                       </div>
                       {{? it.errorMsg }}
-                        <div class="form-group error">
+                        <div class="alert alert-danger" role="alert">
+                          <strong>Ошибка:</strong>
                           {{= it.errorMsg }}
                         </div>
                       {{?}}

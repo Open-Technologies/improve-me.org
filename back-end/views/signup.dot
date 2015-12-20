@@ -78,7 +78,8 @@
                         <input type="number" name="year" tabindex="4" class="form-control" placeholder="Год рождения" value="" min="1900" required>
                       </div>
                       {{? it.errorMsg }}
-                        <div class="form-group error">
+                        <div class="alert alert-danger" role="alert">
+                          <strong>Ошибка:</strong>
                           {{= it.errorMsg }}
                         </div>
                       {{?}}

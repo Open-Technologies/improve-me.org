@@ -22,32 +22,40 @@
       <div id="course-content" class="col-md-12">
         <div class="course-description">
           <div class="edit-profile">
-            <form role="form">
+            {{? it.ok }}
+              <div class="alert alert-success" role="alert">Изменения успешно сохранены</div>
+            {{?}}
+            {{? it.errorMsg }}
+              <div class="alert alert-danger" role="alert">
+                <strong>Ошибка:</strong>
+                {{= it.errorMsg }}
+              </div>
+            {{?}}
+            <form role="form" method="POST" action="/api/profile">
               <div class="form-group">
                 <label>Логин</label>
-                <input type="text" class="form-control" disabled>
-              </div>
-              <div class="form-group">
-                <label>Старый пароль</label>
-                <input type="password" name="current-password" class="form-control" placeholder="************">
-              </div>
-              <div class="form-group">
-                <label>Новый пароль</label>
-                <input type="password" name="new-password" class="form-control">
+                <input type="text" value="{{= it.user.login }}" class="form-control" disabled>
               </div>
               <div class="form-group">
                 <label>Пол</label>
-                <select name="sex" class="form-control" required>
-                  <option value="" disabled selected hidden>Пол</option>
-                  <option value="MALE">Мужской</option>
-                  <option value="FEMALE">Женский</option>
+                <select name="sex" class="form-control">
+                  <option value="MALE" {{? it.user.sex === 'MALE'}}selected{{?}}>Мужской</option>
+                  <option value="FEMALE" {{? it.user.sex === 'FEMALE'}}selected{{?}}>Женский</option>
                 </select>
               </div>
               <div class="form-group">
                 <label>Год Рождения</label>
-                <input type="number" name="year" class="form-control" placeholder="Год рождения" value="" min="1900" required>
+                <input type="number" name="year" value="{{= it.user.year }}" class="form-control" placeholder="Год рождения" value="" min="1900" required>
               </div>
-              <button type="submit" class="btn btn-primary">Сохранить</button>
+              <div class="form-group">
+                <label>Старый пароль</label>
+                <input type="password" name="password" class="form-control" placeholder="************">
+              </div>
+              <div class="form-group">
+                <label>Новый пароль</label>
+                <input type="password" name="newPassword" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Сохранить изменения</button>
             </form>
           </div>
         </div>
