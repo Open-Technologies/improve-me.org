@@ -18,3 +18,7 @@ input.form-control:focus:invalid {
 #course-left-sidebar .btn {
   width: 100%;
 }
+
+.padding-top {
+  padding-top: 30px;
+}

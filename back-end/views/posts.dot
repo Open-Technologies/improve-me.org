@@ -1,6 +1,6 @@
 {{#def.include('includes/header')}}
 {{? it.authorized === false }}
-  <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('/images/zvezdnaya-noch.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
+  <section class="section darkskin fullscreen paralbackground parallax" style="background-image:url('images/zvezdnaya-noch.jpg');" data-img-width="1627" data-img-height="868" data-diff="100">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -68,7 +68,7 @@
   </section>
 {{?}}
 
-<section class="grey content section">
+<section class="grey contentsection">
   <div class="container">
     <div class="row">
       <div id="content" class="col-md-12 col-sm-12 col-xs-12">

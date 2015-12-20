@@ -24,7 +24,7 @@
               <img src="{{= it.post.imageUrl }}" alt="{{= it.post.title }}" class="img-responsive">
             </div>
           {{?}}
-          <div class="blog-desc">
+          <div class="blog-desc {{? !it.post.imageUrl }}padding-top{{?}}">
             {{= it.post.body }}
           </div>
         </div>

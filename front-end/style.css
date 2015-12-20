@@ -2136,12 +2136,17 @@
 	.blog-desc p {
 		padding-bottom: 0;
 	}
-	.blog-desc,
+	.blog-desc {
+    padding:0 40px 30px 40px;
+  }
 	.blog-title {
 		padding:30px 40px;
 	}
   .blog-title {
     padding-bottom: 0;
+  }
+  .blog-image {
+    margin-bottom: 30px;
   }
   .blog-image img {
     width: 100%;
