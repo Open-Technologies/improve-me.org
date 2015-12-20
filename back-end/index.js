@@ -41,7 +41,7 @@ app.use(express.static(path.join(__ROOT, 'front-end')));
 
 app.get('/', function (req, res, next) {
   var curPage = Number(req.query.page) || 1;
-  postsModel.getFeed(curPage, function (err, posts, pages) {
+  postsModel.getPosts(null, curPage, function (err, posts, pages) {
     if (err) {
       return next(err);
     }
@@ -156,16 +156,22 @@ app.get('/logout', function (req, res) {
 
 app.get('/category/:categoryId', function(req, res, next) {
   var curPage = Number(req.query.page) || 1;
-  postsModel.getByCategory(req.params.categoryId, curPage, function (err, posts, pages) {
+  postsModel.getCategoryName(req.params.categoryId, function (err, categoryName) {
     if (err) {
       return next(err);
     }
-    
-    res.render('posts', {
-      authorized: Boolean(req.session.userId),
-      posts: posts,
-      pages: pages,
-      currentPage: curPage
+    postsModel.getPosts(req.params.categoryId, curPage, function (err, posts, pages) {
+      if (err) {
+        return next(err);
+      }
+
+      res.render('posts', {
+        authorized: Boolean(req.session.userId),
+        categoryName: categoryName,
+        posts: posts,
+        pages: pages,
+        currentPage: curPage
+      });
     });
   });
 });

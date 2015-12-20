@@ -75,12 +75,23 @@
         <div class="blog-wrapper">
           <div class="row second-bread">
             <div class="col-md-6 text-left">
-              <h1>Последние статьи</h1>
+              <h1>
+                {{? it.categoryName }}
+                  {{= it.categoryName }}
+                {{??}}
+                  Последние статьи
+                {{?}}
+              </h1>
             </div>
             <div class="col-md-6 text-right">
               <div class="bread">
                 <ol class="breadcrumb">
-                  <li class="active">Главная</li>
+                  {{? it.categoryName }}
+                    <li><a href="/">Главная</a></li>
+                    <li class="active">{{= it.categoryName }}</li>
+                  {{??}}
+                    <li class="active">Главная</li>
+                  {{?}}
                 </ol>
               </div>
             </div>
@@ -90,7 +101,9 @@
         {{~ it.posts:record }}
           <div class="blog-wrapper">
             <div class="blog-title">
-              <a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category}}</a>
+              {{? !it.categoryName }}
+                <a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category}}</a>
+              {{?}}
               <h2><a href="/post/{{= record.id}}">{{= record.title}}</a></h2>
             </div>
             {{? record.imageUrl }}
