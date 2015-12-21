@@ -30,7 +30,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="login">
+<body class="login parallax" style="background-image:url('/images/zvezdnaya-noch.jpg')">
 
   <div id="loader">
     <div class="loader-container">
