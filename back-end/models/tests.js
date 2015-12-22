@@ -11,6 +11,7 @@ var testsModel = {
       .field('test.name', 'name')
       .field('test.image', 'image')
       .field('test.description', 'description')
+      .where('test.is_active=1')
       .group('test.id');
     switch (filters.status) {
       case 'FINISHED':
@@ -57,7 +58,8 @@ var testsModel = {
       .from('test')
       .field('id')
       .field('name')
-      .where('id=?', id);
+      .where('id=?', id)
+      .where('is_active=1');
     mysql.query(testInfoQuery, function (err, testInfo) {
       if (err) {
         return cb(err);
@@ -93,9 +95,13 @@ var testsModel = {
         try {
           questionsInfo.forEach(function (question) {
             question.variants = JSON.parse(question.variants);
-            question.variants.sort(function (a, b) {
-              return a.id - b.id;
-            });
+            if (Array.isArray(question.variants)) {
+	      question.variants.sort(function (a, b) {
+                return a.id - b.id;
+              });
+            } else {
+              question.variants = [];
+            }
           });
         } catch (e) {
           return cb(e);
