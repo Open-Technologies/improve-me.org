@@ -60,9 +60,7 @@ var postsModel = {
       .field('title')
       .field('body')
       .field('imageUrl')
-      .where('id=?', postId)
-      .where('is_active=1');
-    console.log('smt', query.toString());
+      .where('id=?', postId);
     mysql.query(query, function (err, response) {
       if (err) {
         return cb(err);
