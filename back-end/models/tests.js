@@ -27,13 +27,25 @@ var testsModel = {
 
   getCompletedTests: function (userId, cb) {
     var query = squel.select()
-      .from('test')
+      .from('test_result', 't1')
       .field('test.name', 'name')
       .field('test.image', 'image')
       .field('test.short_result_template', 'template')
-      .field('test_result.params', 'params')
-      .join('test_result', null, 'test_result.test_id = test.id AND test_result.user_id = ' + mysql.escape(userId))
-      .group('test.id');
+      .field('t1.params', 'params')
+      .join(
+        squel.select()
+          .from('test_result')
+          .field('user_id')
+          .field('test_id')
+          .field('MAX(timestamp)', 'timestamp')
+          .group('user_id, test_id'),
+        't2',
+        't1.user_id = t2.user_id AND t1.test_id=t2.test_id AND t1.timestamp = t2.timestamp'
+      )
+      .join('test', null, 'test.id = t1.test_id')
+      .where('t1.user_id=?', userId);
+
+    console.log(query.toString());
     mysql.query(query, function (err, response) {
       if (err) {
         return cb(err);
