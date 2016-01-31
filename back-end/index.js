@@ -99,7 +99,7 @@ app.get('/test-result/:resultId', function (req, res, next) {
   });
 });
 
-app.get('/stats', function (req, res, next) {
+app.get('/completed', function (req, res, next) {
   if (!req.session.userId) {
     return res.redirect('/signin');
   }
@@ -107,9 +107,24 @@ app.get('/stats', function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('stats', {
+    res.render('completed', {
       authorized: Boolean(req.session.userId),
       results: results
+    });
+  });
+});
+
+app.get('/stats', function (req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/signin');
+  }
+  testsModel.getStats(function (err, stats) {
+    if (err) {
+      return next(err);
+    }
+    res.render('stats', {
+      authorized: Boolean(req.session.userId),
+      stats: stats
     });
   });
 });

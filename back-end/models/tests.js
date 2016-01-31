@@ -40,12 +40,11 @@ var testsModel = {
           .field('MAX(timestamp)', 'timestamp')
           .group('user_id, test_id'),
         't2',
-        't1.user_id = t2.user_id AND t1.test_id=t2.test_id AND t1.timestamp = t2.timestamp'
+        't1.user_id = t2.user_id AND t1.test_id = t2.test_id AND t1.timestamp = t2.timestamp'
       )
       .join('test', null, 'test.id = t1.test_id')
       .where('t1.user_id=?', userId);
 
-    console.log(query.toString());
     mysql.query(query, function (err, response) {
       if (err) {
         return cb(err);
@@ -210,6 +209,96 @@ var testsModel = {
         });
       });
     });
+  },
+
+  _getSelfConceptGroup: function (params) {
+    if (params.selfConceptLevel > 45) {
+      return 'Заниженная';
+    } else if (params.selfConceptLevel > 25) {
+      return 'Нормальная';
+    }
+    return 'Завышенная';
+  },
+
+  _getTemperamentGroup: function (params) {
+    if (params.extraversion >= 12 && params.extraversion <= 24 && params.neuroticism >= 12 && params.neuroticism <= 24) {
+      return 'Холерик';
+    } else if (params.extraversion >= 0 && params.extraversion <= 12 && params.neuroticism >= 12 && params.neuroticism <= 24) {
+      return 'Меланхолик';
+    } else if (params.extraversion >= 0 && params.extraversion <= 12 && params.neuroticism >= 0 && params.neuroticism <= 12) {
+      return 'Флегматик';
+    }
+    return 'Сангвиник';
+  },
+
+  _getAggressionGroup: function (params) {
+    if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=0 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=27) {
+      return 'Низкая';
+    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=28 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=49) {
+      return 'Средняя';
+    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=50 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=71) {
+      return 'Повышенная';
+    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=72 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=82) {
+      return 'Высокая';
+    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=83) {
+      return 'Очень высокая';
+    }
+  },
+
+  getStats: function (cb) {
+    var query = squel.select()
+      .from('test_result', 'result')
+      .field('result.test_id', 'id')
+      .field('result.params', 'params')
+      .join(
+        squel.select()
+          .from('test_result')
+          .field('user_id')
+          .field('test_id')
+          .field('MAX(timestamp)', 'timestamp')
+          .group('user_id, test_id'),
+        'last',
+        'result.user_id = last.user_id AND result.test_id = last.test_id AND result.timestamp = last.timestamp'
+      )
+      .where('result.test_id IN (1, 2, 3)');
+    mysql.query(query, function (err, result) {
+      if (err) {
+        return cb(err);
+      }
+
+      var stats = {
+        selfConcept: {},
+        temperament: {},
+        aggression: {}
+      };
+      var group;
+      for (var i = 0; i < result.length; i++) {
+        switch (result[i].id) {
+          case 1:
+            group = this._getTemperamentGroup(JSON.parse(result[i].params));
+            if (!stats.temperament[group]) {
+              stats.temperament[group] = 0;
+            }
+            stats.temperament[group] ++;
+            break;
+          case 2:
+            group = this._getSelfConceptGroup(JSON.parse(result[i].params));
+            if (!stats.selfConcept[group]) {
+              stats.selfConcept[group] = 0;
+            }
+            stats.selfConcept[group] ++;
+            break;
+          case 3:
+            group = this._getAggressionGroup(JSON.parse(result[i].params));
+            if (!stats.aggression[group]) {
+              stats.aggression[group] = 0;
+            }
+            stats.aggression[group] ++;
+            break;
+        }
+      }
+      cb(null, stats);
+    }.bind(this));
   }
 };
 
