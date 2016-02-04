@@ -91,7 +91,7 @@
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li><a href="/">Главная</a></li>
-                  <li class="dropdown ttmenu-half">
+                  <!--li class="dropdown ttmenu-half">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Категории <b class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
                       <li>
@@ -110,9 +110,10 @@
                         </div>
                       </li>
                     </ul>
-                  </li>
+                  </li-->
                   <li><a href="/tests">Тесты</a></li>
-                  <li><a href="/stats">Личная статистика</a></li>
+                  <li><a href="/completed">Пройденные тесты</a></li>
+                  <li><a href="/stats">Общая статистика</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li>
