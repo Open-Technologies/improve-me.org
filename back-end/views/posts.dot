@@ -102,7 +102,7 @@
           <div class="blog-wrapper">
             <div class="blog-title">
               {{? !it.categoryName }}
-                <a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category }}</a>
+                <!-- a class="category_title" href="/category/{{= record.categoryId }}">{{= record.category }}</a -->
               {{?}}
               <h2><a href="/post/{{= record.id }}">{{= record.title }}</a></h2>
             </div>
