@@ -232,16 +232,12 @@ var testsModel = {
   },
 
   _getAggressionGroup: function (params) {
-    if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=0 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=27) {
+    if (params.p_a + params.irr + params.v_a >=0 && params.p_a + params.irr + params.v_a < 17) {
       return 'Низкая';
-    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=28 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=49) {
+    } else if (params.p_a + params.irr + params.v_a >=17 && params.p_a + params.irr + params.v_a <=25) {
       return 'Средняя';
-    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=50 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=71) {
-      return 'Повышенная';
-    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=72 && params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 <=82) {
+    } else if (params.p_a + params.irr + params.v_a > 25) {
       return 'Высокая';
-    } else if (params.physical_aggression*10 + params.indirect_aggression*8 + params.verbal_aggression*13 >=83) {
-      return 'Очень высокая';
     }
   },
 
