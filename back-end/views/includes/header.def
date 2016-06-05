@@ -112,12 +112,14 @@
                     </ul>
                   </li-->
                   <li><a href="/tests">Тесты</a></li>
-                  <li><a href="/completed">Пройденные тесты</a></li>
+                  {{? it.authorized }}
+                    <li><a href="/completed">Пройденные тесты</a></li>
+                  {{?}}
                   <li><a href="/stats">Общая статистика</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li>
-                    {{? it.authorized === false }}
+                    {{? !it.authorized }}
                       <a class="btn btn-primary" href="/signup"><i class="fa fa-sign-in"></i> Создать Аккаунт</a>
                     {{??}}
                       <a class="btn btn-primary" href="/profile"><i class="fa fa-edit"></i> Мой профиль</a>

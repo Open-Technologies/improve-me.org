@@ -33,6 +33,13 @@ app.use(session({
   store: new MySQLSession(mysqlConfig)
 }));
 
+app.use(function (req, res, next) {
+  if (!req.session.userId) {
+    req.session.userId = 0;
+  }
+  next();
+});
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
@@ -57,12 +64,12 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/tests', function (req, res, next) {
+  var filters = {};
   if (!req.session.userId) {
-    return res.redirect('/signin');
+    filters.status = 'ALL';
+  } else {
+    filters.status = req.query.status || 'NOT_FINISHED';
   }
-  var filters = {
-    status: req.query.status || 'NOT_FINISHED'
-  };
   testsModel.getList(req.session.userId, filters, function (err, tests) {
     if (err) {
       return next(err);
@@ -76,9 +83,6 @@ app.get('/tests', function (req, res, next) {
 });
 
 app.get('/tests/:id', function (req, res, next) {
-  if (!req.session.userId) {
-    return res.redirect('/signin');
-  }
   testsModel.getTest(req.params.id, function (err, testData) {
     if (err) {
       return next(err);
@@ -88,9 +92,6 @@ app.get('/tests/:id', function (req, res, next) {
 });
 
 app.get('/test-result/:resultId', function (req, res, next) {
-  if (!req.session.userId) {
-    return res.redirect('/signin');
-  }
   testsModel.getResult(req.session.userId, req.params.resultId, function (err, result) {
     if (err) {
       return next(err);
@@ -115,9 +116,6 @@ app.get('/completed', function (req, res, next) {
 });
 
 app.get('/stats', function (req, res, next) {
-  if (!req.session.userId) {
-    return res.redirect('/signin');
-  }
   testsModel.getStats(function (err, stats) {
     if (err) {
       return next(err);
@@ -224,9 +222,6 @@ app.post('/api/signup', function (req, res) {
 });
 
 app.post('/api/test/:testId', function (req, res, next) {
-  if (!req.session.userId) {
-    return next();
-  }
   testsModel.completeTest(req.session.userId, req.params.testId, req.body, function (err, resultId) {
     if (err) {
       return next(err);
